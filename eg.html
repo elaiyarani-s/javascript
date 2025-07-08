@@ -1,0 +1,43 @@
+<html>
+<head>
+    <title>Add and Delete</title>
+</head>
+ 
+<body>
+    <h1>List of Items</h1>
+    <ul id="items">
+        <li>First item <a href="#" onclick="deleteItem(this)">[Delete]</a></li>
+        <li>Second item<a href="#" onclick="deleteItem(this)">[Delete]</a></li>
+    </ul>
+    <input type="text" id="newText" />
+    <input type="button" value="add" onclick="addItem()">
+    <script>
+        function addItem() {
+            const input = document.getElementById('newText');
+            const text = input.value.trim();
+            if (text === '') return;
+ 
+            const li = document.createElement('li');
+            li.textContent = text + ' ';
+ 
+            const deleteLink = document.createElement('a');
+            deleteLink.href = '#';
+            deleteLink.textContent = '[Delete]';
+            deleteLink.style.marginLeft = '10px';
+            deleteLink.onclick = function () {
+                li.remove(); // Delete the current <li>
+            };
+ 
+ 
+            li.appendChild(deleteLink);
+            document.getElementById('items').appendChild(li);
+ 
+            input.value = ''; // Clear input
+        }
+        function deleteItem(link) {
+            const li = link.parentElement;
+            li.remove();
+        }
+    </script>
+</body>
+</html>
